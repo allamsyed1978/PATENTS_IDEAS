@@ -1,0 +1,32 @@
+sequenceDiagram
+    autonumber
+    title Genre-Based Automatic Mosaic Display on TV
+
+    participant User
+    participant RemoteControl
+    participant TV
+    participant Splitter
+    participant GenreRecognitionSystem
+    participant ContentSource
+
+    User->>RemoteControl: Select preferred genres (e.g., Sports, Drama)
+    RemoteControl->>TV: Send genre selection preferences
+    TV->>GenreRecognitionSystem: Request metadata for selected genres
+    GenreRecognitionSystem->>ContentSource: Fetch categorized content metadata
+    ContentSource-->>GenreRecognitionSystem: Provide metadata for genres
+    GenreRecognitionSystem-->>TV: Send genre-specific content data
+
+    TV->>Splitter: Process incoming content signals
+    Splitter->>TV: Organize content by genre into mosaic layout
+    TV->>User: Display genre-based mosaic view
+
+    User->>TV: Interact with mosaic (e.g., select a tile/genre)
+    TV->>ContentSource: Request selected content for playback
+    ContentSource-->>TV: Stream requested content
+    TV->>User: Play selected content
+
+    alt New or trending content available
+        ContentSource->>GenreRecognitionSystem: Provide updated metadata
+        GenreRecognitionSystem->>TV: Update mosaic display dynamically
+        TV->>User: Refresh displayed mosaic
+    end
